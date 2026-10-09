@@ -74,11 +74,12 @@ class DocumentIngestor(BaseComponent):
 
     Args:
         pdf_mode: mode for pdf extraction, one of "normal", "mathpix", "ocr",
-            "multimodal". Any other value raises ValueError.
+            "multimodal".
             - normal: parse pdf text
             - mathpix: parse pdf text using mathpix
             - ocr: parse pdf image using flax
             - multimodal: parse pdf using Adobe PDF Services
+            Any other value raises ValueError.
         doc_parsers: list of document parsers to parse the document
         text_splitter: splitter to split the document into text nodes
         override_file_extractors: override file extractors for specific file extensions
