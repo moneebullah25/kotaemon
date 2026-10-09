@@ -49,7 +49,7 @@ class HtmlReader(BaseReader):
 
         file_path = Path(file_path).resolve()
 
-        html_text = file_path.read_text(encoding="utf-8", errors="replace")
+        html_text = file_path.read_text(encoding="utf-8-sig", errors="replace")
 
         # read HTML
         all_text = html2text.html2text(html_text)

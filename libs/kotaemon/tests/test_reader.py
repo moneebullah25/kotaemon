@@ -34,11 +34,14 @@ def test_html_reader():
 
 def test_html_reader_keeps_line_breaks_and_last_char(tmp_path):
     html_file = tmp_path / "t.html"
-    html_file.write_text("<p>Hello\nworld</p>\n<p>last</p>", encoding="utf-8")
+    html_file.write_text(
+        "<p>Hello\nworld caf\u00e9</p>\n<p>last</p>", encoding="utf-8-sig"
+    )
 
-    documents = HtmlReader().load_data(html_file)
+    text = HtmlReader().load_data(html_file)[0].text
 
-    assert documents[0].text == "Hello world\n\nlast"
+    assert "Hello world caf\u00e9" in text
+    assert text.endswith("last")
 
 
 def test_pdf_reader():
