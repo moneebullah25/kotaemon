@@ -1,4 +1,3 @@
-import sys
 from unittest.mock import patch
 
 import pytest
@@ -113,7 +112,7 @@ def test_concurrent_reranking_binds_prompt_per_document(cls, module):
     documents = [Document(text=f"doc-{idx}") for idx in range(3)]
     reranker = cls(llm=FakeLLM(), concurrent=True)
 
-    with patch.object(sys.modules[module], "ThreadPoolExecutor", _DeferredExecutor):
+    with patch(f"{module}.ThreadPoolExecutor", _DeferredExecutor):
         reranker(documents, query="q")
 
     # trulens sorts documents by content; doc-0..2 are already in sorted order
