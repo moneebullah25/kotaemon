@@ -49,8 +49,7 @@ class HtmlReader(BaseReader):
 
         file_path = Path(file_path).resolve()
 
-        with file_path.open("r") as f:
-            html_text = "".join([line[:-1] for line in f.readlines()])
+        html_text = file_path.read_text(encoding="utf-8", errors="replace")
 
         # read HTML
         all_text = html2text.html2text(html_text)
